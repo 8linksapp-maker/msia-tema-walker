@@ -182,7 +182,7 @@ const categoryCounts = allCategories.map(cat => {
     </div>
     <div class="widget-content">
       {allCategories.map(cat => (
-        <a href={`/categoria/${getCategorySlug(cat)}`} class="tag">#{cat}</a>
+        <a href={`/categoria/${getCategorySlug(cat)}`} class="tag">#{getCategoryName(cat)}</a>
       ))}
     </div>
   </div>
