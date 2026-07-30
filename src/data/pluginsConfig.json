@@ -92,5 +92,10 @@
             "position": 3
         },
         "sequences": []
+    },
+    "customCode": {
+        "head": "",
+        "bodyStart": "",
+        "bodyEnd": ""
     }
 }
