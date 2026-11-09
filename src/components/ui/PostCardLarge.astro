@@ -1,5 +1,8 @@
 ---
 import { BLOG_BASE } from '../../lib/postUrl';
+import { readData } from '../../lib/readData';
+const siteConfig = readData('siteConfig.json', {}) as any;
+const hidePostDate = !!siteConfig.hidePostDate;
 interface Props {
   title: string;
   description: string;
@@ -38,9 +41,11 @@ const { title, description, slug, heroImage, category, pubDate } = Astro.props;
         {title}
       </h2>
       <p class="text-white/70 text-sm mt-2 line-clamp-2">{description}</p>
-      <p class="text-white/50 text-xs mt-3 post-date">
-        {pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-      </p>
+      {!hidePostDate && (
+        <p class="text-white/50 text-xs mt-3 post-date">
+          {pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+        </p>
+      )}
     </div>
   </a>
 </article>
