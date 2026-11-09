@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 import { readData } from '../lib/readData';
 const categoriesData = readData('categories.json', []);
 const siteConfig = readData('siteConfig.json');
+const hidePostDate = !!siteConfig.hidePostDate;
 
 const pluginsConfig = readData('pluginsConfig.json', {}) as any;
 const sidebarConfig = pluginsConfig?.emailList?.sidebar;
@@ -79,11 +80,13 @@ const categoryCounts = allCategories.map(cat => {
             <h6 class="post-title my-0">
               <a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a>
             </h6>
-            <ul class="meta list-inline mt-1 mb-0">
-              <li class="list-inline-item">
-                {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-              </li>
-            </ul>
+            {!hidePostDate && (
+              <ul class="meta list-inline mt-1 mb-0">
+                <li class="list-inline-item">
+                  {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       ))}
@@ -157,11 +160,13 @@ const categoryCounts = allCategories.map(cat => {
               <h5 class="post-title mb-0 mt-4">
                 <a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a>
               </h5>
-              <ul class="meta list-inline mt-2 mb-0">
-                <li class="list-inline-item">
-                  {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                </li>
-              </ul>
+              {!hidePostDate && (
+                <ul class="meta list-inline mt-2 mb-0">
+                  <li class="list-inline-item">
+                    {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                  </li>
+                </ul>
+              )}
             </div>
           ))}
         </div>
