@@ -7,6 +7,7 @@ import { getCollection } from 'astro:content';
 import { readData } from '../lib/readData';
 const siteConfig = readData('siteConfig.json');
 const homeConfig = readData('home.json');
+const hidePostDate = !!siteConfig.hidePostDate;
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -97,7 +98,7 @@ function formatDate(date: Date) {
                 </h1>
                 <ul class="meta list-inline mb-0">
                   <li class="list-inline-item"><a href="/sobre">{featuredPost.data.author || siteConfig.author}</a></li>
-                  <li class="list-inline-item">{formatDate(featuredPost.data.pubDate)}</li>
+                  {!hidePostDate && <li class="list-inline-item">{formatDate(featuredPost.data.pubDate)}</li>}
                 </ul>
               </div>
               <a href={`${BLOG_BASE}/${featuredPost.slug}`}>
@@ -141,9 +142,7 @@ function formatDate(date: Date) {
                     </div>
                     <div class="details clearfix">
                       <h6 class="post-title my-0"><a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a></h6>
-                      <ul class="meta list-inline mt-1 mb-0">
-                        <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>
-                      </ul>
+                      {!hidePostDate && <ul class="meta list-inline mt-1 mb-0"><li class="list-inline-item">{formatDate(post.data.pubDate)}</li></ul>}
                     </div>
                   </div>
                 ))}
@@ -161,9 +160,7 @@ function formatDate(date: Date) {
                     </div>
                     <div class="details clearfix">
                       <h6 class="post-title my-0"><a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a></h6>
-                      <ul class="meta list-inline mt-1 mb-0">
-                        <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>
-                      </ul>
+                      {!hidePostDate && <ul class="meta list-inline mt-1 mb-0"><li class="list-inline-item">{formatDate(post.data.pubDate)}</li></ul>}
                     </div>
                   </div>
                 ))}
@@ -210,7 +207,7 @@ function formatDate(date: Date) {
                       </div>
                       <ul class="meta list-inline mt-4 mb-0">
                         <li class="list-inline-item"><a href="/sobre">{editorPick.data.author || siteConfig.author}</a></li>
-                        <li class="list-inline-item">{formatDate(editorPick.data.pubDate)}</li>
+                        {!hidePostDate && <li class="list-inline-item">{formatDate(editorPick.data.pubDate)}</li>}
                       </ul>
                       <h5 class="post-title mb-3 mt-3"><a href={`${BLOG_BASE}/${editorPick.slug}`}>{editorPick.data.title}</a></h5>
                       <p class="excerpt mb-0">{editorPick.data.description}</p>
@@ -230,9 +227,7 @@ function formatDate(date: Date) {
                       </div>
                       <div class="details clearfix">
                         <h6 class="post-title my-0"><a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a></h6>
-                        <ul class="meta list-inline mt-1 mb-0">
-                          <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>
-                        </ul>
+                        {!hidePostDate && <ul class="meta list-inline mt-1 mb-0"><li class="list-inline-item">{formatDate(post.data.pubDate)}</li></ul>}
                       </div>
                     </div>
                   ))}
@@ -270,7 +265,7 @@ function formatDate(date: Date) {
                         </div>
                         <ul class="meta list-inline mt-4 mb-0">
                           <li class="list-inline-item"><a href="/sobre">{trendingPosts[0].data.author || siteConfig.author}</a></li>
-                          <li class="list-inline-item">{formatDate(trendingPosts[0].data.pubDate)}</li>
+                          {!hidePostDate && <li class="list-inline-item">{formatDate(trendingPosts[0].data.pubDate)}</li>}
                         </ul>
                         <h5 class="post-title mb-3 mt-3"><a href={`${BLOG_BASE}/${trendingPosts[0].slug}`}>{trendingPosts[0].data.title}</a></h5>
                         <p class="excerpt mb-0">{trendingPosts[0].data.description}</p>
@@ -286,9 +281,7 @@ function formatDate(date: Date) {
                           </div>
                           <div class="details clearfix">
                             <h6 class="post-title my-0"><a href={`${BLOG_BASE}/${trendingPosts[1].slug}`}>{trendingPosts[1].data.title}</a></h6>
-                            <ul class="meta list-inline mt-1 mb-0">
-                              <li class="list-inline-item">{formatDate(trendingPosts[1].data.pubDate)}</li>
-                            </ul>
+                            {!hidePostDate && <ul class="meta list-inline mt-1 mb-0"><li class="list-inline-item">{formatDate(trendingPosts[1].data.pubDate)}</li></ul>}
                           </div>
                         </div>
                       )}
@@ -313,7 +306,7 @@ function formatDate(date: Date) {
                         </div>
                         <ul class="meta list-inline mt-4 mb-0">
                           <li class="list-inline-item"><a href="/sobre">{trendingPosts[2].data.author || siteConfig.author}</a></li>
-                          <li class="list-inline-item">{formatDate(trendingPosts[2].data.pubDate)}</li>
+                          {!hidePostDate && <li class="list-inline-item">{formatDate(trendingPosts[2].data.pubDate)}</li>}
                         </ul>
                         <h5 class="post-title mb-3 mt-3"><a href={`${BLOG_BASE}/${trendingPosts[2].slug}`}>{trendingPosts[2].data.title}</a></h5>
                         <p class="excerpt mb-0">{trendingPosts[2].data.description}</p>
@@ -329,9 +322,7 @@ function formatDate(date: Date) {
                           </div>
                           <div class="details clearfix">
                             <h6 class="post-title my-0"><a href={`${BLOG_BASE}/${trendingPosts[3].slug}`}>{trendingPosts[3].data.title}</a></h6>
-                            <ul class="meta list-inline mt-1 mb-0">
-                              <li class="list-inline-item">{formatDate(trendingPosts[3].data.pubDate)}</li>
-                            </ul>
+                            {!hidePostDate && <ul class="meta list-inline mt-1 mb-0"><li class="list-inline-item">{formatDate(trendingPosts[3].data.pubDate)}</li></ul>}
                           </div>
                         </div>
                       )}
@@ -365,7 +356,7 @@ function formatDate(date: Date) {
                       <h4 class="post-title"><a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a></h4>
                       <ul class="meta list-inline mb-0">
                         <li class="list-inline-item"><a href="/sobre">{post.data.author || siteConfig.author}</a></li>
-                        <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>
+                        {!hidePostDate && <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>}
                       </ul>
                     </div>
                     <a href={`${BLOG_BASE}/${post.slug}`}>
@@ -409,7 +400,7 @@ function formatDate(date: Date) {
                           {post.data.category && (
                             <li class="list-inline-item"><a href={`/categoria/${getCategorySlug(post.data.category)}`}>{post.data.category}</a></li>
                           )}
-                          <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>
+                          {!hidePostDate && <li class="list-inline-item">{formatDate(post.data.pubDate)}</li>}
                         </ul>
                         <h5 class="post-title"><a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a></h5>
                         <p class="excerpt mb-0">{post.data.description}</p>
