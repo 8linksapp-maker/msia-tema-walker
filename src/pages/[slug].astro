@@ -38,6 +38,7 @@ const currentAuthor = authorsData.find((a: any) => a.id === post.data.author) ||
 
 const categorySlug = post.data.category ? getCategorySlug(post.data.category, allCategories) : '';
 const siteConfig = readData('siteConfig.json', {}) as any;
+const hidePostDate = !!siteConfig.hidePostDate;
 const postUrl = `${siteConfig.url || Astro.url.origin}${BLOG_BASE}/${post.slug}`;
 ---
 
@@ -80,9 +81,11 @@ const postUrl = `${siteConfig.url || Astro.url.origin}${BLOG_BASE}/${post.slug}`
                 {post.data.category && (
                   <li class="list-inline-item"><a href={`/categoria/${categorySlug}`}>{post.data.category}</a></li>
                 )}
-                <li class="list-inline-item post-date">
-                  {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                </li>
+                {!hidePostDate && (
+                  <li class="list-inline-item post-date">
+                    {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                  </li>
+                )}
               </ul>
             </div>
             {post.data.heroImage && (
