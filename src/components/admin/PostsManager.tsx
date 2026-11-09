@@ -308,6 +308,10 @@ export default function PostsManager() {
                                                             <input type="text" list="authors-list" value={quickEditData.author} onChange={e => setQuickEditData({ ...quickEditData, author: e.target.value })} className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500" />
                                                             <datalist id="authors-list">{authors.map(a => <option key={a.id} value={a.name} />)}</datalist>
                                                         </div>
+                                                        <div className="sm:col-span-2 lg:col-span-3">
+                                                            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Descricao (aparece no card da home)</label>
+                                                            <textarea rows={2} value={quickEditData.description || ''} onChange={e => setQuickEditData({ ...quickEditData, description: e.target.value })} className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 resize-y" />
+                                                        </div>
                                                         <div className="flex items-end gap-3">
                                                             <label className="flex items-center gap-2 text-sm font-bold text-slate-600 cursor-pointer">
                                                                 <input type="checkbox" checked={quickEditData.draft} onChange={e => setQuickEditData({ ...quickEditData, draft: e.target.checked })} className="rounded" />
