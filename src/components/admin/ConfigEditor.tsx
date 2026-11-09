@@ -163,6 +163,11 @@ export default function ConfigEditor() {
                             <input type="text" value={config?.name || ''} onChange={e => setConfig({ ...config, name: e.target.value })} className={inputClass} />
                         </div>
                         <div>
+                            <label className={labelClass}>Nome do Autor / Equipe</label>
+                            <input type="text" placeholder="Ex.: Equipe Memorize Agora" value={config?.author || ''} onChange={e => setConfig({ ...config, author: e.target.value })} className={inputClass} />
+                            <p className="text-xs text-slate-400 mt-1 ml-1">Aparece nos posts da home quando o artigo nao tem autor definido.</p>
+                        </div>
+                        <div>
                             <label className={labelClass}>Descrição do Site</label>
                             <textarea rows={2} placeholder="Breve descrição que aparece no widget 'Sobre' da sidebar do blog" value={config?.description || ''} onChange={e => setConfig({ ...config, description: e.target.value })} className={`${inputClass} resize-y`} />
                         </div>
