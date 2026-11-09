@@ -4,6 +4,10 @@ import { BLOG_BASE } from '../../lib/postUrl';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { getCollection } from 'astro:content';
+import { readData } from '../../lib/readData';
+
+const siteConfig = readData('siteConfig.json', {}) as any;
+const hidePostDate = !!siteConfig.hidePostDate;
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -58,11 +62,13 @@ const posts = (await getCollection('blog')).sort(
                     </a>
                   </div>
                   <div class="details">
-                    <ul class="meta list-inline mb-0">
-                      <li class="list-inline-item">
-                        {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                      </li>
-                    </ul>
+                    {!hidePostDate && (
+                      <ul class="meta list-inline mb-0">
+                        <li class="list-inline-item">
+                          {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                        </li>
+                      </ul>
+                    )}
                     <h5 class="post-title mb-3 mt-3"><a href={`${BLOG_BASE}/${post.slug}`}>{post.data.title}</a></h5>
                     {post.data.description && (
                       <p class="excerpt mb-0">{post.data.description}</p>
